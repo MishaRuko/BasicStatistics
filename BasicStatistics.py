@@ -132,22 +132,3 @@ def genData(dataSetSize=100, randomness=4.5, UpperBound=20):
             dataSet = np.append(dataSet, LowerBound[i]-(np.random.rand()*randomness))
     
     return dataSet
-
-def prepData(data1, data2):
-    # orders data1 and data2 such that data1 is ordered in ascending order and each value in data2 still corresponds to it's initial 
-    # value in data1
-    # eg: data1 = [3, 1, 2]
-    #     data2 = [50, 70, 40]
-    # result will be: 
-    # data1 = [1, 2, 3]
-    # data2 = [70, 40, 50]
-    allData = []
-    for i in range(len(data1)):
-        allData.append([data1[i], data2[i]])
-    allData.sort()
-
-    for i in range(len(allData)):
-        data1[i] = allData[i][0]
-        data2[i] = allData[i][1]
-    
-    return data1, data2
