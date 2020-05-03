@@ -20,7 +20,6 @@ def sampleVariance(data):
     sampleVariance = (variance(data)*len(data))/(len(data)-1)
     return sampleVariance
 
-
 def standardDev(data):
     standardDev = sqrt(variance(data))
     return standardDev
@@ -86,7 +85,7 @@ def gradientDescentLinearRegression(Xs, Ys, alpha, iterations):
     return theta
 
 def linReg(xdata, ydata, sample: bool):
-    # linear regression
+    # linear regression using Pearson's correlation coefficient
     m = 0
     r = cor(xdata, ydata)
     if sample == False:
