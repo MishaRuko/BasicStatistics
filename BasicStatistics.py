@@ -50,24 +50,40 @@ def cor(xdata, ydata):
     cor = num/denum
     return cor
 
-def prepData(data1, data2):
-    # orders data1 and data2 such that data1 is ordered in ascending order and each value in data2 still corresponds to it's initial 
-    # value in data1
-    # eg: data1 = [3, 1, 2]
-    #     data2 = [50, 70, 40]
-    # result will be: 
-    # data1 = [1, 2, 3]
-    # data2 = [70, 40, 50]
-    allData = []
-    for i in range(len(data1)):
-        allData.append([data1[i], data2[i]])
-    allData.sort()
+def gradientDescentLinearRegression(Xs, Ys, alpha, iterations):
+    # GENERATING COST FUNCTION WILL PRODUCE SEEMINGLY NON-CONVEX CURVE BUT IT IS ACTUALLY CONVEX
+    theta = [0, 0]
+    Xs = [[1, x] for x in Xs]
 
-    for i in range(len(allData)):
-        data1[i] = allData[i][0]
-        data2[i] = allData[i][1]
+    '''
+    theta = [theta0, theta1] - just parameters
+    xi = [1, x] - 1 is there to multiply with theta0 - xi is ONE training example
+    '''
+    # Does numpy automatically tranpose arrays when finding dot product?
+    h = lambda theta, xi: np.dot(theta, xi)
     
-    return data1, data2
+    '''
+    theta = [theta0, theta1]
+    Xs = all Xs - the function iterates through all Xs in form [[1, x0], [1, x1], ..., [1, xn]]
+    Ys = all Ys - the fucntion iterates through all Ys
+    '''
+    J = lambda theta, Xs, Ys: 1/(len(Ys))*np.sum([np.power((h(theta, Xs[i]) - Ys[i]), 2) for i in range(len(Ys))])
+    
+    '''
+    theta = [theta0, theta1]
+    x = all Xs - the function iterates through all Xs in form [[1, x0], [1, x1], ..., [1, xn]]
+    y = all Ys - the fucntion iterates through all Ys
+    j = for the x[i][j] part - needs to be provided by the calling function
+    process: when updating jth theta pass the same j to dJ
+    '''
+    dJ = lambda theta, x, y, j: (1/(len(Ys))) * np.sum( [ (h(theta, x[i]) - y[i])*x[i][j] for i in range(len(y)) ] )
+
+    for _ in range(iterations):
+        tmpTheta = theta.copy()
+        for j in range(len(theta)):
+            theta[j] = tmpTheta[j] - alpha*dJ(tmpTheta, Xs, Ys, j)
+
+    return theta
 
 def linReg(xdata, ydata, sample: bool):
     # linear regression
@@ -117,3 +133,22 @@ def genData(dataSetSize=100, randomness=4.5, UpperBound=20):
             dataSet = np.append(dataSet, LowerBound[i]-(np.random.rand()*randomness))
     
     return dataSet
+
+def prepData(data1, data2):
+    # orders data1 and data2 such that data1 is ordered in ascending order and each value in data2 still corresponds to it's initial 
+    # value in data1
+    # eg: data1 = [3, 1, 2]
+    #     data2 = [50, 70, 40]
+    # result will be: 
+    # data1 = [1, 2, 3]
+    # data2 = [70, 40, 50]
+    allData = []
+    for i in range(len(data1)):
+        allData.append([data1[i], data2[i]])
+    allData.sort()
+
+    for i in range(len(allData)):
+        data1[i] = allData[i][0]
+        data2[i] = allData[i][1]
+    
+    return data1, data2
