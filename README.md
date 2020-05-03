@@ -9,7 +9,7 @@ Functions included:
 5. sample standard deviation
 6. mean absolute deviation
 7. Pearson's correlation coefficient
-8. Data sorter
+8. Linear regression (using gradient descent)
 9. Linear Regression (using Pearson's correlation coefficient)
 10. Mean gradient
 11. Mean absolute deviation regression (linear regresssion but instead of using standard deviation it uses MAD)
