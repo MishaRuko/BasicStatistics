@@ -1,5 +1,5 @@
 # BasicStatistics
-Some basic statistic formulas/functions written in python
+Some basic statistic formulas/functions written in python \n
 These functions require numpy
 Functions included:
 1. Mean
