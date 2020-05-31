@@ -1,6 +1,8 @@
 # BasicStatistics
-Some basic statistic formulas/functions written in python \n
-These functions require numpy
+Some basic statistic formulas/functions written in python.
+
+These functions require numpy.
+
 Functions included:
 1. Mean
 2. variance
