@@ -51,6 +51,8 @@ def cor(xdata, ydata):
 
 def gradientDescentLinearRegression(Xs, Ys, alpha, iterations):
     # GENERATING COST FUNCTION WILL PRODUCE SEEMINGLY NON-CONVEX CURVE BUT IT IS ACTUALLY CONVEX
+
+    # TODO modify function to work with any number of features
     theta = [0, 0]
     Xs = [[1, x] for x in Xs]
 
@@ -70,7 +72,7 @@ def gradientDescentLinearRegression(Xs, Ys, alpha, iterations):
     
     '''
     theta = [theta0, theta1]
-    x = all Xs - the function iterates through all Xs in form [[1, x0], [1, x1], ..., [1, xn]]
+    x = all Xs - the function iterates through all Xs in form [[1, x[0][1]], [1, x[1][1]], ..., [1, x[m-1][1]]]
     y = all Ys - the fucntion iterates through all Ys
     j = for the x[i][j] part - needs to be provided by the calling function
     process: when updating jth theta pass the same j to dJ
@@ -118,17 +120,34 @@ def MADReg(xdata, ydata):
     c = meanOf(ydata)-(m*meanOf(xdata))
     return [m, c]
 
-def genData(dataSetSize=100, randomness=4.5, UpperBound=20):
-    # genrates random data that has size dataSetSize, a rather arbitrary randomness value of randomness and the UpperBound of the data is 20
-    # however the values are still likely to go over 20 after a random number is added to them
+def genData(dataSetSize=100, randomness=4.5, gradient=0.1, intercept=0):
+    # all data
     dataSet = np.array([])
 
-    # y = range*x
-    LowerBound = UpperBound/dataSetSize * np.arange(0, dataSetSize)
+    LowerBound = gradient * np.arange(0, dataSetSize)
+    
     for i in range(dataSetSize):
         if np.random.randint(0, 2) == 0:
-            dataSet = np.append(dataSet, LowerBound[i]+(np.random.rand()*randomness))
+            dataSet = np.append(dataSet, LowerBound[i]+(np.random.rand()*randomness)+intercept)
         else:
-            dataSet = np.append(dataSet, LowerBound[i]-(np.random.rand()*randomness))
+            dataSet = np.append(dataSet, LowerBound[i]-(np.random.rand()*randomness)+intercept)
     
     return dataSet
+
+def genCluster(size=100, centre=[0, 0], maxDev=5):
+    cluster = []
+    for _ in range(size):
+        if np.random.randint(0, 2) == 0:
+            XSign = 1
+        else:
+            XSign = -1
+        
+        if np.random.randint(0, 2) == 0:
+            YSign = 1
+        else:
+            YSign = -1
+        # cluster.append([centre[0]+XSign*np.random.rand()*maxDev, centre[1]+YSign*np.random.rand()*maxDev])
+        xValue = XSign*np.random.rand()*maxDev
+        cluster.append([centre[0]+xValue, centre[1]+np.random.rand()*YSign*sqrt(maxDev**2-(xValue**2))])
+
+    return cluster
