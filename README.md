@@ -13,4 +13,5 @@ Functions included:
 9. Linear Regression (using Pearson's correlation coefficient)
 10. Mean gradient
 11. Mean absolute deviation regression (linear regresssion but instead of using standard deviation it uses MAD)
-12. Data generator
+12. Line cluster data generator
+13. Circular cluster generator
