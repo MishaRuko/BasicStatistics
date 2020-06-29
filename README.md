@@ -1,7 +1,7 @@
-# BasicStatistics
-Some basic statistic formulas/functions written in python.
+# Machine Learning Algorithms
+Some statistics, machine learning and data generation algorithms written in python.
 
-These functions require numpy.
+Numpy is required
 
 Functions included:
 1. Mean
@@ -16,4 +16,4 @@ Functions included:
 10. Mean gradient
 11. Mean absolute deviation regression (linear regresssion but instead of using standard deviation it uses MAD)
 12. Line cluster data generator
-13. Circular cluster generator
+13. Circular cluster data generator
