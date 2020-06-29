@@ -37,7 +37,7 @@ def MAD(data):
     return MAD
 
 def cor(xdata, ydata):
-    # Pearson's corrlation coefficient
+    # Pearson's correlation coefficient
     cor = 0
     xmean = meanOf(xdata)
     ymean = meanOf(ydata)
